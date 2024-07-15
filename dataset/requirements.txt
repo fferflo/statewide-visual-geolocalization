@@ -1,0 +1,10 @@
+tiledwebmaps[scripts]
+requests
+opencv-python
+scipy
+shapely
+tinypl
+scikit-image
+pillow
+tqdm
+numpy
