@@ -1,0 +1,77 @@
+data:
+  mercator: false
+  cell-size-meters: 30.0
+
+  meters-per-pixel: [0.2, 0.4, 0.8, 1.6]
+  aerial-shape: [384, 384]
+  pv-shape: [480, 640]
+
+  train:
+    offset-region-size-meters: 20.0
+    bucket-size-meters: 5
+    min-offset-factor: 1.0
+    list:
+      - tiles-path: TODO
+        path: TODO
+      - tiles-path: TODO
+        path: TODO
+      - tiles-path: TODO
+        path: TODO
+      - tiles-path: TODO
+        path: TODO
+      - tiles-path: TODO
+        path: TODO
+
+  test:
+    path: TODO
+    stride: 50
+    bucket-size-meters: 10
+
+    tiles:
+      - path: TODO
+    geojson: TODO
+
+train:
+  batchsize: 30
+
+  hem:
+    clustersize: 30
+    batchsize: 30
+
+    # pre-scan-batches: 0 # Number of randomly sampled batches before the first scan
+    first-scan-batches: 1 # Number of batches in the first scan
+    max-scan-batches: 16384 # Maximum number of batches per scan
+
+    raise-factor: 2 # Factor to increase the scan size
+    raise-after-samples: 5000 # Minimum number of samples before increasing scan size
+
+  grad-clip-norm: 1.0
+  learning-rate: 1.0e-4
+  weight-decay: 1.0e-6
+  loss:
+    decoupled: true
+    label-smoothing: 0.1
+  schedule:
+    type: cosine
+    warmup-steps: 1000
+    total-steps: 200000
+    alpha: 0.1
+
+test:
+  batchsize: 30
+  period-samples: 300000
+  recall-radii: [25, 50, 100]
+
+model:
+  pv-encoder: "geoloc.model.convnext.ConvNeXt.base"
+  pv-decoder: "geoloc.model.SpatialSoftmax"
+  aerial-encoder: "geoloc.model.convnext.ConvNeXt.base"
+  aerial-decoder: "geoloc.model.SpatialSoftmax"
+  pv-aerial-shared-encoder: false
+
+  heads: 64
+
+  embedding-channels: 1024
+  scale:
+    init: 6.0
+    learnable: false
