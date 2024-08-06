@@ -414,9 +414,9 @@ class DatasetWriter:
         with open(os.path.join(self.path, f"dataset.json"), "w") as f:
             json.dump(metadata, f)
 
-def video_to_dataset(video_file, path, shape, workers=16):
+def video_to_dataset(video_file, path, shape, workers=16, stride=1):
     video_loader = cv2.VideoCapture(video_file)
-    num_frames = int(video_loader.get(cv2.CAP_PROP_FRAME_COUNT))
+    num_frames = (int(video_loader.get(cv2.CAP_PROP_FRAME_COUNT)) + stride - 1) // stride
     seconds_per_frame = 1.0 / video_loader.get(cv2.CAP_PROP_FPS)
 
     writer = DatasetWriter(path, num_frames, shape=shape)
@@ -429,7 +429,8 @@ def video_to_dataset(video_file, path, shape, workers=16):
                 writer.src_shape = image.shape[:2]
             if not ret:
                 break
-            yield image, index, seconds_per_frame * index
+            if index % stride == 0:
+                yield image, index // stride, seconds_per_frame * index
             index += 1
 
     pipe = source()
