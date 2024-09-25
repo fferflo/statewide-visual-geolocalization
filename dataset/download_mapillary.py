@@ -38,10 +38,12 @@ if not os.path.exists(download_path):
 
 assert args.presize in ["original", "256", "1024", "2048"]
 
+print("############################################")
 print("Make sure to follow the rate limits specified in the Mapillary API documentation: https://www.mapillary.com/developer/api-documentation#rate-limits")
 print("The script is currently using the following rate limits:")
 print(f"'--ratelimit1 {args.ratelimit1}' requests per minute for graph.mapillary.com/:image_id")
 print(f"'--ratelimit2 {args.ratelimit2}' requests per minute for graph.mapillary.com/images")
+print("############################################")
 assert args.ratelimit1 <= 60000
 assert args.ratelimit2 <= 10000
 
@@ -194,7 +196,7 @@ if not os.path.exists(image_ids_file):
     pipe = generator()
     pipe = pl.thread.mutex(pipe)
 
-    ratelimit = twm.util.Ratelimit(args.ratelimit1 / 60.0, 1.0)
+    ratelimit = twm.util.Ratelimit(args.ratelimit2 / 60.0, 1.0)
     error_lock = threading.Lock()
     def process(bbox):
         if not bbox_intersects(bbox):
@@ -278,7 +280,7 @@ allowed_camera_types = {"perspective", "fisheye", "brown", "fisheye_opencv", "ra
 
 pipe = enumerate(ids)
 
-ratelimit = twm.util.Ratelimit(0.5 * args.ratelimit2 / 60.0, 1.0)
+ratelimit = twm.util.Ratelimit(0.5 * args.ratelimit1 / 60.0, 1.0)
 def rate(x):
     with ratelimit:
         return x
