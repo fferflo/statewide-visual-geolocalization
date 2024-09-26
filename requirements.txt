@@ -16,3 +16,5 @@ flax
 transformers
 faiss-cpu
 weightbridge
+scikit-learn
+tinypl
