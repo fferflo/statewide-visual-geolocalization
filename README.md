@@ -89,6 +89,19 @@ Please follow [these instructions](dataset) to download the data.
     Recall@1<50m: 60.0%
     ```
 
+## Citation
+
+Please consider citing our work if you use the code or data, or build upon the ideas presented in the paper:
+
+```
+@inproceedings{fervers2024statewide,
+  title     = {Statewide Visual Geolocalization in the Wild},
+  author    = {Florian Fervers and Sebastian Bullinger and Christoph Bodensteiner and Michael Arens and Rainer Stiefelhagen},
+  booktitle = {ECCV},
+  year      = {2024}
+}
+```
+
 ## Issues
 
 Feel free to open an issue in this Github repository if you have any problems with the code or data.
