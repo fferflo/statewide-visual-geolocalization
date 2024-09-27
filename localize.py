@@ -187,5 +187,5 @@ if pv_dataset.latlons is not None:
             xk = einx.any("pv [pred_av]", x[:, :k])
             recall = np.mean(np.where(xk, 1.0, 0.0))
 
-            print(f"Recall@{k}<{r}: {recall:.4f}")
+            print(f"Recall@{k}<{r}m: {recall:.4f}")
         print()
