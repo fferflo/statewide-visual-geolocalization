@@ -2,13 +2,21 @@
 
 #### [Florian Fervers](https://fferflo.github.io/), [Sebastian Bullinger](https://sbcv.github.io/), [Christoph Bodensteiner](https://scholar.google.de/citations?user=eQS65kAAAAAJ), [Michael Arens](https://scholar.google.de/citations?user=Sg5ZkXwAAAAJ), [Rainer Stiefelhagen](https://cvhci.anthropomatik.kit.edu/people_596.php)
 
-### Links: [Paper](https://arxiv.org/abs/2409.16763) | [Poster](https://fferflo.github.io/assets/img/statewide24-poster.jpg)
+### Links: [Paper](https://arxiv.org/abs/2409.16763) | [Poster](https://fferflo.github.io/assets/img/statewide24-poster.jpg) | [Examples](https://photos.app.goo.gl/xZYcsvSQg7vq83V68)
 
 *The poster will be presented at ECCV on Friday, October 4th, 10:30-12:30 at poster board #139.*
 
 ---
 
 ![summary](https://github.com/fferflo/statewide-visual-geolocalization/blob/main/images/summary.jpg)
+
+## Overview
+
+1. [Installation](#installation)
+2. [Dataset](#dataset)
+3. [Training](#training)
+4. [Evaluation](#evaluation) (includes pretrained weights)
+5. [Examples](https://photos.app.goo.gl/xZYcsvSQg7vq83V68): A photo album that contains >2000 randomly chosen street-view images and corresponding predictions from our model.
 
 ## Installation
 
@@ -57,7 +65,7 @@ Please follow [these instructions](dataset) to download the data.
     ```bash
     python create_reference_database.py --train .../train-YYYY-MM-DDTHH-mm-ss --output .../refdb-massgis --tiles .../data/massgis/utm19 .../data/massgis/utm18
     ```
-    This will create a division of the region into cells, predict embeddings for all cells, create a FAISS index for efficient retrieval and store everything in the output directory. *This might take several days depending on your hardware setup.*
+    This will create a division of the region into cells, predict embeddings for all cells, create a FAISS index for efficient retrieval and store everything in the output directory. *This might take several days depending on your hardware setup and search region size.*
 
     By default, the search region is defined to cover all tiles that are specified in `--tiles`. The argument accepts multiple tile datasets, such as the overlapping UTM18 and UTM19 regions of Massachusetts. Optionally, a geojson file can be passed to the script via `--geojson` to define a custom search region as a subset of the region covered by the tiles.
 
@@ -80,3 +88,7 @@ Please follow [these instructions](dataset) to download the data.
     ```
     Recall@1<50m: 60.0%
     ```
+
+## Issues
+
+Feel free to open an issue in this Github repository if you have any problems with the code or data.
