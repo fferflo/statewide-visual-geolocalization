@@ -69,6 +69,12 @@ Please follow [these instructions](dataset) to download the data.
 
     By default, the search region is defined to cover all tiles that are specified in `--tiles`. The argument accepts multiple tile datasets, such as the overlapping UTM18 and UTM19 regions of Massachusetts. Optionally, a geojson file can be passed to the script via `--geojson` to define a custom search region as a subset of the region covered by the tiles.
 
+    **Pretrained weights** can be used by cloning the repository from Huggingface
+    ```bash
+    git clone https://huggingface.co/fferflo/statewide-geoloc-nomassgis
+    ```
+    and passing the path to the `--train` argument. These are not the original weights used in the paper, but are retrained using this repository. The results are slightly better than reported in the paper (see below).
+
     The output folder will contain the files:
     ```
     aerial_features.bin         # Embeddings for all cells
@@ -84,9 +90,35 @@ Please follow [these instructions](dataset) to download the data.
     ```
     This will predict embeddings for all street-view photos in the given dataset, and localize them against the reference database. The `--stride` parameter can be used to localize only a subset of the images (e.g. every 10th image with `--stride 10`).
 
-    The script will print the recall of the localization:
+    The script will print the `Recall@k<r` of the localization for different radii `r` and top-`k` cells. For example, the pretrained weights from above yield the following results:
     ```
-    Recall@1<50m: 60.0%
+    > python localize.py --query .../data/mapillary-massgis --reference .../refdb-massgis --stride 100
+
+    ... takes some time ...
+
+    Recall@1<0m: 0.2880
+    Recall@5<0m: 0.5007
+    Recall@10<0m: 0.5516
+    Recall@50<0m: 0.6432
+    Recall@100<0m: 0.6771
+
+    Recall@1<25m: 0.4683
+    Recall@5<25m: 0.6495
+    Recall@10<25m: 0.6914
+    Recall@50<25m: 0.7659
+    Recall@100<25m: 0.7915
+
+    Recall@1<50m: 0.6105
+    Recall@5<50m: 0.7229
+    Recall@10<50m: 0.7578
+    Recall@50<50m: 0.8216
+    Recall@100<50m: 0.8430
+
+    Recall@1<100m: 0.6297
+    Recall@5<100m: 0.7385
+    Recall@10<100m: 0.7732
+    Recall@50<100m: 0.8369
+    Recall@100<100m: 0.8583
     ```
 
 ## Citation
