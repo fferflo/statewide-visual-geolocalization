@@ -57,7 +57,7 @@ Please follow [these instructions](dataset) to download the data.
     ```bash
     python3 train.py --output .../train --config config/main.yaml
     ```
-    The results will be stored in `.../train-YYYY-MM-DDTHH-mm-ss`. The training uses all available GPUs by default.
+    The results will be stored in `.../train-YYYY-MM-DDTHH-mm-ss`. The training uses all available GPUs by default. A training run with 2xH100 takes about 2.5 days.
 
 ## Evaluation
 
