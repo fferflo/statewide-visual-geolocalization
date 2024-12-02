@@ -4,8 +4,6 @@
 
 ### Links: [Paper](https://arxiv.org/abs/2409.16763) | [Poster](https://fferflo.github.io/assets/img/statewide24-poster.jpg) | [Examples](https://photos.app.goo.gl/xZYcsvSQg7vq83V68)
 
-*The poster will be presented at ECCV on Friday, October 4th, 10:30-12:30 at poster board #139.*
-
 ---
 
 ![summary](https://github.com/fferflo/statewide-visual-geolocalization/blob/main/images/summary.jpg)
